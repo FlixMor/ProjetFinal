@@ -78,7 +78,6 @@ CLASSES
             get_one()
             get_all()
 
-        
     EVENT
         Event
         EventDAO
