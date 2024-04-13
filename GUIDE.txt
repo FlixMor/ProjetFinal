@@ -1,0 +1,92 @@
+
+SQL
+
+    TABLE USER
+        nom_complet
+        courriel    UNIQUE
+        username    UNIQUE
+        password    UNIQUE
+
+    TABLE EVENT
+        nom
+        categorie
+        place_dispo
+        date
+        prix
+        artiste
+
+    TABLE RESERVATION
+        username
+        event
+        place
+        statut
+
+    TABLE PAIEMENT
+        username
+        num_carte
+        num_secu
+
+--------------------------------------------------------------------------
+INTERFACES
+
+    INTERFACE GENERAL
+        -Connexion
+        -Inscription
+        -Deconnexion
+        -Event
+            -details
+        -About
+        
+    INTERFACE USER
+        Profil
+            -Modifier
+                -Nom
+                -Courriel
+                -Username
+                -Password
+        Event
+            -Voir Reservation
+            -Reserver
+            -Annuler
+            -Paiement de billet
+
+    INTERFACE ADMIN  (login: admin/admin)
+        Gestion Event
+            -Cree
+            -Supprimmer
+            -Modifier
+                -Nom
+                -Categorie
+                -Place
+                -date
+                -prix
+                -artiste
+                
+        Gestion Reservation
+            -Annuler
+            -Paiement de billet
+
+--------------------------------------------------------------------------
+
+CLASSES
+
+    USER
+        User
+        UserDAO
+            add()
+            delete()
+            get_one()
+            get_all()
+
+        
+    EVENT
+        Event
+        EventDAO
+
+    RESERVATION
+        Reservation
+        ReservationDAO
+
+    PAIEMENT
+        Paiement
+        PaiementDAO
