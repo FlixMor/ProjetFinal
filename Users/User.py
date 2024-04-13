@@ -1,9 +1,21 @@
 class User:
-    def __init__(self, nom_complet, courriel, username, password) -> None:
+    def __init__(self, id, nom_complet, courriel, username, password, age, phone, usertype):
+        self.__id = id
         self.__nom_complet = nom_complet
         self.__courriel = courriel
         self.__username = username
         self.__password = password
+        self.__age = age
+        self.__phone = phone
+        self.__usertype = usertype
+    
+    # Getters and Setters
+    @property
+    def id(self):
+        return self.__id
+    @id.setter
+    def id(self, v):
+        self.__id = v
 
     @property
     def nom_complet(self):
@@ -32,3 +44,24 @@ class User:
     @password.setter
     def password(self, v):
         self.__password = v
+
+    @property
+    def age(self):
+        return self.__age
+    @age.setter
+    def age(self, v):
+        self.__age = v
+    
+    @property
+    def phone(self):
+        return self.__phone
+    @phone.setter
+    def phone(self, v):
+        self.__phone = v
+    
+    @property
+    def usertype(self):
+        return self.__usertype
+    @usertype.setter
+    def usertype(self, v):
+        self.__usertype = v

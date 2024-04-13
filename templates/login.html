@@ -1,0 +1,40 @@
+{% extends "default.html" %}
+
+{% block title %} Login {% endblock %}
+
+{% block content %}
+
+{% if message %}
+<div class="center-container" style="margin-top: 100px;">
+    <div class="alert alert-danger" role="alert">
+        {% if message == "Invalid username or password" %}
+            Invalid username or password.
+        {% elif message == "User not found" %}
+            User not found.
+
+        {% else %}
+        <div class="alert alert-info" role="alert">
+            Veuillez renseignez les champs ci-dessous pour vous connecter
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endif %}
+<div class="login-container" style="margin-top: 30px;">
+    <form action="{{ url_for('login') }}" method="POST">
+        <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" class="form-control" id="username" name="username">
+            <div id="usernameHelp" class="form-text">Username is case sensitive.</div>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" name="password">
+            <div id="passwordHelp" class="form-text">Password is case sensitive.</div>
+        </div>
+        <div class="center-container">
+            <button type="submit" class="btn btn-outline-warning">Connexion</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
