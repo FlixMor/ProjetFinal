@@ -7,7 +7,7 @@ class UserDAO:
 
     @classmethod
     def add(cls, user: User):
-        sql = "INSERT INTO user(nom_complet, courriel, username, password, age, phone, usertype) VALUES(%s, %s, %s, %s, %s, %s, %s)"
+        sql = "INSERT INTO user (nom_complet, courriel, username, password, age, phone, usertype) VALUES(%s, %s, %s, %s, %s, %s, %s)"
         params = (user.nom_complet, user.courriel, user.username, user.password, user.age, user.phone, user.usertype)
         try:
             cls.cursor.execute(sql, params)

@@ -43,20 +43,18 @@
                     <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
                 <!-- Add Login/My Account button -->
-                {% block login_button %}
-                    {% if user_logged_in %}
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">My Account</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{{ url_for('logout') }}"> Disconnect </a></li>
-                        </ul>
-                    </li>
-                    <a class="btn btn-outline-warning" style="margin-right: 50px" href="{{ url_for('account') }}">My Account</a>
-                    {% else %}
-                    <a class="btn btn-outline-success" style="margin-right: 30px" href="{{ url_for('login') }}">Login</a>
-                    <a class="btn btn-outline-success" style="margin-right: 30px" href="{{ url_for('register') }}">Register</a>
-                    {% endif %}
-                {% endblock %}
+                {% if 'username' in session %}
+                <li class="nav-item dropdown">
+                    <a class="btn btn-outline-warning" style="margin-right: 50px" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">My Account</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{{ url_for('account') }}"> Account </a></li>
+                        <li><a class="dropdown-item" href="{{ url_for('logout') }}"> Disconnect </a></li>
+                    </ul>
+                </li>
+                {% else %}
+                <a class="btn btn-outline-success" style="margin-right: 30px" href="{{ url_for('login') }}">Login</a>
+                <a class="btn btn-outline-success" style="margin-right: 30px" href="{{ url_for('register') }}">Register</a>
+                {% endif %}
             </div>
         </div>
     </div>

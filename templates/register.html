@@ -1,8 +1,78 @@
-{% extends 'default.html' %}
+{% extends "default.html" %}
 
-{% block title %} Home page {% endblock %}
+{% block title %} Register {% endblock %}
 
 {% block content %}
+<div class="container" style="margin-top: 70px;">
+    {% if message %}
+    <div class="center-container">
+        <div class="center-container alert alert-{{ 'primary' if message == 'info' else 'success' if message == 'success' else 'danger' }}" role="alert" style="width: 400px;">
+            {% if message == "info" %}
+            Please fill out the forms.
+            {% elif message == "success" %}
+            Added successfully.
+            {% elif message == "failure" %}
+            There was an error while adding the user.
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
+    <div class="login-container" style="max-width: 700px; margin-bottom: 50px;">
+        <form action="{{ url_for('register') }}" method="POST">
+            <div class="mb-4">
+                <label for="fullname" class="form-label">Full Name</label>
+                <input type="text" class="form-control" id="fullname" name="fullname" style="height: 30px;" required>
+            </div>
+            <div class="mb-4">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control" id="username" name="username" style="height: 30px;" required>
+                <div id="passwordHelp" class="form-text">Username is case sensitive.</div>
+            </div>
+            <div class="mb-4">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email" style="height: 30px;" required>
+            </div>
+            <div class="mb-4">
+                <label for="age" class="form-label">Age</label>
+                <input type="number" class="form-control" id="age" name="age" style="height: 30px;" required>
+            </div>
+            <div class="mb-4">
+                <label for="phone" class="form-label">Phone Number</label>
+                <input type="text" class="form-control" id="phone" name="phone" style="height: 30px;" required>
+            </div>
+            <div class="mb-4">
+                <label for="password" class="form-label">Password</label>
+                <div class="input-group">
+                    <input type="password" class="form-control" id="password" name="password" style="height: 30px;" required>
+                </div>
+                <div id="passwordHelp" class="form-text">Password is case sensitive.</div>
+                <button class="btn btn-outline-warning" type="button" id="togglePassword" style="border-radius: 15px; width: 80px; margin-top: 10px;">
+                    <span id="showText">Show</span>
+                    <span id="hideText" style="display: none;">Hide</span>
+                </button>
+            </div>
+            <div class="center-container">
+                <button type="submit" class="btn btn-outline-warning">Register</button>
+            </div>
+        </form>
+    </div>
+</div>
 
-
+<script>
+document.getElementById('togglePassword').addEventListener('click', function() {
+    var passwordField = document.getElementById('password');
+    var showText = document.getElementById('showText');
+    var hideText = document.getElementById('hideText');
+    
+    if (passwordField.type === 'password') {
+        passwordField.type = 'text';
+        showText.style.display = 'none';
+        hideText.style.display = 'inline';
+    } else {
+        passwordField.type = 'password';
+        showText.style.display = 'inline';
+        hideText.style.display = 'none';
+    }
+});
+</script>
 {% endblock %}

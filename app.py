@@ -37,6 +37,10 @@ def about():
 # # # LOGIN # # #
 @app.route('/login', methods=["GET", "POST"])
 def login():
+    # Check if the user is already logged in
+    if "username" in session:
+        return redirect(url_for("logout"))
+
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
@@ -47,7 +51,7 @@ def login():
             if user and user[4] == password:  # Assuming password is stored in the 5th column
                 # User authenticated successfully
                 session["username"] = username
-                return redirect(url_for("index"))
+                return render_template("index.html", username=username)
             else:
                 message = "Invalid username or password"
         else:
@@ -55,7 +59,8 @@ def login():
         
         return render_template("login.html", message=message)
     else:
-        return render_template("login.html")
+        message = "info"
+        return render_template("login.html", message=message)
 
 # # # LOGOUT # # #
 @app.route('/logout')
@@ -73,13 +78,17 @@ def account():
 
 @app.route('/register', methods=["GET", "POST"])
 def register():
+    # Check if the user is already logged in
+    if "username" in session:
+        return redirect(url_for("logout"))
+
     message = ""
     user = None
     
     if request.method == "POST":
         req = request.form
-        nom_complet = req['nom_complet']
-        courriel = req['courriel']
+        nom_complet = req['fullname']
+        courriel = req['email']
         username = req['username']
         password = req['password']
         age = req['age']
@@ -87,10 +96,12 @@ def register():
         usertype = "basic"
 
         if nom_complet=="" or courriel=="" or username=="" or password=="" or age=="" or phone=="":
-            message = "error"
+            message = "failure"
         else:    
             user = User(nom_complet, courriel, username, password, age, phone, usertype)
             message = UserDAO.add(user)
+    else:
+        message ="info"
             
     return render_template('register.html', message=message, user=user)
 

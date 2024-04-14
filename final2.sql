@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : dim. 14 avr. 2024 à 00:22
+-- Généré le : dim. 14 avr. 2024 à 01:32
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -35,8 +35,15 @@ CREATE TABLE `user` (
   `password` varchar(45) NOT NULL,
   `age` int(3) NOT NULL,
   `phone` varchar(16) NOT NULL,
-  `usertype` varchar(10) NOT NULL
+  `usertype` varchar(10) NOT NULL DEFAULT 'basic'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `user`
+--
+
+INSERT INTO `user` (`id`, `nom_complet`, `courriel`, `username`, `password`, `age`, `phone`, `usertype`) VALUES
+(1, '', 'admin@admin.com', 'Admin', 'p4ss.w0rd', 0, '', 'admin');
 
 --
 -- Index pour les tables déchargées
@@ -50,6 +57,16 @@ ALTER TABLE `user`
   ADD UNIQUE KEY `courriel` (`courriel`),
   ADD UNIQUE KEY `username` (`username`),
   ADD UNIQUE KEY `password` (`password`);
+
+--
+-- AUTO_INCREMENT pour les tables déchargées
+--
+
+--
+-- AUTO_INCREMENT pour la table `user`
+--
+ALTER TABLE `user`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
