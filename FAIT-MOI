@@ -1,0 +1,36 @@
+
+#      À COPIER-COLLER DANS LE FICHIER .env QUE TU POURRA CRÉER SUR LA RACINE DE PROJETFINAL:
+#                           (SANS LES GUILLEMETS)
+#       'SECRET_KEY=e240e952090f2db9bf14307545ff955aca63651287212492217f1548a18063db'
+#
+#               
+#       Pour empêcher d'accidentellement uploader le fichier .env avec des informations
+#        sensibles sur github, on l'ajoute au fichier .gitignore 
+#
+#           Ajouter a la ligne du .gitignore : .env
+#
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+
+"""
+PS: En utilisant la base de donnée final2.sql, tu va pouvoir utiliser le site pour te créer un compte
+avec l'onglet register, puis tu vas pouvoir te connecter avec le login et le mot de passe que tu as 
+choisi. Je n'ai rien ajouté encore sur les page home/about/events, mais l'authentification/connexion 
+et la création de comptes utilisateurs ca l'air terminé. 
+
+J'ai écrit les mesures de sécurités que j'ai ajouté dans le fichier notes.txt.
+
+
+Je n'ai pas rien ajouté dans la page My account, mais éventuellement on pourrait 
+rajouter une option pour que les utilisateurs puisses modifier leur renseignements.
+Dans le CRUD de UserDAO il faudrait faire une fonction update différente pour chaque variable de
+la classe User, autrement ca sera pas une partie de plaisir avec des if/elif/else.
+Une fois les fonctions UPDATE crées je pourrais finir la page My account.
+
+N'hésite pas si jamais je peux aider avec quoi que ce soit, écrit moi sur télégram,
+et je vais avoir beaucoup de temps libre lundi et mardi alors si tu manques de temps
+n'hésite pas à me refiler du travail!
+
+
+Désolé pour les romans et bon travail!
+
+"""
