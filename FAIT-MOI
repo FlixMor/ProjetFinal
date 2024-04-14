@@ -37,3 +37,27 @@ n'hésite pas à me refiler du travail!
 Désolé pour les romans et bon travail!
 
 """
+
+"""
+Hello ! J'ai ajouté les fonctions de modifications de variable de UserDAO et EventDAO
+Je t'ai laissé aussi les init si tu veux les utiliser pour les tests. Les autres classes sont en chemin 
+je continurai a travailler dessu demain. N'hesite pas si tu as des demande par rapport a des fonctionalités
+supplémetaires ou si mon code n'est pas clair je suis joignable sur telegram comme d'hab ;)
+
+UserDAO
+    update_nom_complet()
+    update_courriel()
+    update_username()
+    update_password()
+    update_age()
+    update_phone()
+
+EventDAO
+    add()
+    del_event()
+    get_event_by_name()
+    list_event()
+    +tout les update_*nom*()
+...
+
+"""
