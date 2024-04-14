@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, session
+from flask_bcrypt import Bcrypt  # Utilisé pour le hashage des mots de passes #
 
 from Users.User import User
 from Users.UserDAO import UserDAO
@@ -16,6 +17,7 @@ load_dotenv() # Chargement des variables d'environnement du fichier .env
 
 app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY')
+bcrypt = Bcrypt(app)  
 
 
 # # # HOME # # #
@@ -90,7 +92,7 @@ def register():
         nom_complet = req['fullname']
         courriel = req['email']
         username = req['username']
-        password = req['password']
+        password = bcrypt.generate_password_hash(req['password']).decode('utf-8')
         age = req['age']
         phone = req['phone']
         usertype = "basic"

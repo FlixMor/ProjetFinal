@@ -1,0 +1,18 @@
+Résumé des fonctions de sécurités ajoutées:
+
+1- La clé secrète utilisée par flask a été générée avec le module secrets,
+    en utilisant la fonction secrets.token_hex(32). La longueur de 32 est optimale,
+     elle est considérée comme étant une bonne pratique et un bon équilibre entre 
+      la sécurité et l'efficacité.
+
+2- Cette clé ne sera pas visible en texte clair, mais plutôt sous forme de variable stockée
+    dans le fichier ".env". Cela ajoutera donc une couche de protection supplémentaire.
+
+3- Le fichier .env est ajouté au fichier .gitignore, de sorte qu'il ne soit pas traqué par github.
+    De sorte que si quelqu'un venait à récupérer le code, il ne pourrait pas voir la clé secrète.
+
+4- Le module Bcrypt a été utilisée pour hasher les mot de passe des utilisateurs. 
+    Cela permet de protéger les mots de passes des utilisateurs dans la base de donnée.
+     Une couche de protection supplémentaire.
+
+5-

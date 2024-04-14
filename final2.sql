@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : dim. 14 avr. 2024 à 01:32
+-- Généré le : dim. 14 avr. 2024 à 02:02
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -43,7 +43,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `nom_complet`, `courriel`, `username`, `password`, `age`, `phone`, `usertype`) VALUES
-(1, '', 'admin@admin.com', 'Admin', 'p4ss.w0rd', 0, '', 'admin');
+(1, '', 'admin@admin.com', 'Admin', 'p4ss.w0rd', 0, '', 'admin'),
+(3, 'Olivier Malo', 'olimalo9@hotmail.com', 'OliMalo', 'supercrabe', 24, '450-271-8011', 'basic');
 
 --
 -- Index pour les tables déchargées
@@ -66,7 +67,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
