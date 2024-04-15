@@ -4,6 +4,7 @@ from flask_bcrypt import Bcrypt  # Utilisé pour le hashage des mots de passes #
 from Users.User import User
 from Users.UserDAO import UserDAO
 
+import re # Pour le phone pattern
 
 from dotenv import load_dotenv # Pour lire le fichier .env
 import os                      # Pour lire le fichier .env
@@ -18,6 +19,8 @@ load_dotenv() # Chargement des variables d'environnement du fichier .env
 app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY')
 bcrypt = Bcrypt(app)  
+
+phone_pattern = re.compile(r'^\d{3}-\d{3}-\d{4}$')
 
 
 # # # HOME # # #
@@ -97,8 +100,18 @@ def register():
         phone = req['phone']
         usertype = "basic"
 
+        
         if nom_complet=="" or courriel=="" or username=="" or password=="" or age=="" or phone=="":
             message = "failure"
+
+        elif not (18 <= int(age) <= 100):
+            message = 'invalidage'
+            return render_template('register.html', message=message)
+        
+        elif not phone_pattern.match(phone):
+            message = 'invalidphone'
+            return render_template('register.html', message=message)
+        
         else:    
             user = User(nom_complet, courriel, username, password, age, phone, usertype)
             message = UserDAO.add(user)

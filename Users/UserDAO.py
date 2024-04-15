@@ -34,8 +34,8 @@ class UserDAO:
     # UPDATE NOM_COMPLET    entres = objet User , new_nom_complet 
     @classmethod
     def update_nom_complet(cls,user:User,new_nom_complet):
-        sql = "UPDATE user SET nom_complet = %s WHERE nom_complet = %s"
-        params = (new_nom_complet,user.nom_complet)
+        sql = "UPDATE user SET nom_complet = %s WHERE username = %s"
+        params = (new_nom_complet, user.username)
         try:
             UserDAO.cursor.execute(sql,params)
             UserDAO.connexion.commit()
@@ -48,8 +48,8 @@ class UserDAO:
     # UPDATE COURRIEL    entres = objet User , new_courriel 
     @classmethod
     def update_courriel(cls,user:User,new_courriel):
-        sql = "UPDATE user SET courriel = %s WHERE courriel = %s"
-        params = (new_courriel,user.courriel)
+        sql = "UPDATE user SET courriel = %s WHERE username = %s"
+        params = (new_courriel, user.username)
         try:
             UserDAO.cursor.execute(sql,params)
             UserDAO.connexion.commit()
@@ -63,7 +63,7 @@ class UserDAO:
     @classmethod
     def update_username(cls,user:User,new_username):
         sql = "UPDATE user SET username = %s WHERE username = %s"
-        params = (new_username,user.username)
+        params = (new_username, user.username)
         try:
             UserDAO.cursor.execute(sql,params)
             UserDAO.connexion.commit()
@@ -76,8 +76,8 @@ class UserDAO:
     # UPDATE password    entres = objet User , new_password
     @classmethod
     def update_password(cls,user:User,new_password):
-        sql = "UPDATE user SET password = %s WHERE password = %s"
-        params = (new_password,user.password)
+        sql = "UPDATE user SET password = %s WHERE username = %s"
+        params = (new_password, user.username)
         try:
             UserDAO.cursor.execute(sql,params)
             UserDAO.connexion.commit()
@@ -90,8 +90,8 @@ class UserDAO:
     # UPDATE age    entres = objet User , new_age
     @classmethod
     def update_age(cls,user:User,new_age):
-        sql = "UPDATE user SET age = %s WHERE age = %s"
-        params = (new_age,user.age)
+        sql = "UPDATE user SET age = %s WHERE username = %s"
+        params = (new_age, user.username)
         try:
             UserDAO.cursor.execute(sql,params)
             UserDAO.connexion.commit()
@@ -104,8 +104,8 @@ class UserDAO:
     # UPDATE phone    entres = objet User , new_phone
     @classmethod
     def update_phone(cls,user:User,new_phone):
-        sql = "UPDATE user SET phone = %s WHERE phone = %s"
-        params = (new_phone,user.phone)
+        sql = "UPDATE user SET phone = %s WHERE username = %s"
+        params = (new_phone, user.username)
         try:
             UserDAO.cursor.execute(sql,params)
             UserDAO.connexion.commit()
@@ -114,3 +114,4 @@ class UserDAO:
         except Exception as error:
             message = "failure"
             return message
+    

@@ -13,6 +13,10 @@
             Added successfully.
             {% elif message == "failure" %}
             There was an error while adding the user.
+            {% elif message == "invalidphone" %}
+            Phone number must be in the format xxx-xxx-xxxx.
+            {% elif message == "invalidage" %}
+            Age must be between 18 and 100.
             {% endif %}
         </div>
     </div>
@@ -75,4 +79,5 @@ document.getElementById('togglePassword').addEventListener('click', function() {
     }
 });
 </script>
+
 {% endblock %}

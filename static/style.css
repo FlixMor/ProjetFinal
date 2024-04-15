@@ -93,3 +93,21 @@
     justify-content: center;
     align-items: center;
 }
+
+.container-acc-left {
+    flex: 1;
+    background-color: #ffc80098; /* Example background color */
+    border: 4px double #038e2cbd; /* Example border */
+    padding: 20px; /* Example padding */
+    transition: background-color ease 0.4s, border ease 0.4s;
+}
+
+.container-acc-left h2 {
+    color: #ff0000;
+}
+
+.container-acc-left:hover {
+    flex: 1;
+    background-color: #e1b207a4; /* Example background color */
+    border: 4px double #ffffffd5; /* Example border */
+}
