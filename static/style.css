@@ -7,7 +7,7 @@
     color: white;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 20px;
-    font-weight: light; 
+    font-weight: light;
     text-transform: uppercase;
     transition: background-color 0.4s ease, border-radius 0.4s ease, color 0.4s ease;
     padding: 30px;
@@ -96,9 +96,12 @@
 
 .container-acc-left {
     flex: 1;
-    background-color: #ffc80098; /* Example background color */
-    border: 4px double #038e2cbd; /* Example border */
-    padding: 20px; /* Example padding */
+    background-color: #ffc80098;
+    /* Example background color */
+    border: 4px double #038e2cbd;
+    /* Example border */
+    padding: 20px;
+    /* Example padding */
     transition: background-color ease 0.4s, border ease 0.4s;
 }
 
@@ -108,6 +111,33 @@
 
 .container-acc-left:hover {
     flex: 1;
-    background-color: #e1b207a4; /* Example background color */
-    border: 4px double #ffffffd5; /* Example border */
+    background-color: #e1b207a4;
+    /* Example background color */
+    border: 4px double #ffffffd5;
+    /* Example border */
+}
+
+.container-acc-left> #accDivButton {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 35px;
+    color: rgba(37, 100, 0, 0.753);
+    margin: 2px;
+    border-bottom: 6px groove rgba(37, 100, 0, 0.753);
+    border-top: 6px groove rgba(37, 100, 0, 0.753);
+    border-radius: 20px;
+    transition: background-color 0.6s ease, border-radius 0.6s ease, font-size 0.6s ease, color 0.6s ease, border 0.6s ease;
+}
+
+.container-acc-left> #accDivButton:hover {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 35px;
+    color: #ffffff;
+    margin: 2px;
+    border-bottom: 6px groove #ffffff;
+    border-top: 6px groove rgb(255, 255, 255);
+    border-radius: 50px;
+}
+
+.container-acc-left>#accDivData {
+    color: black;
 }
