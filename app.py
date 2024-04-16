@@ -50,14 +50,12 @@ def login():
         req = request.form
         username = request.form["username"]
         password = request.form["password"]
-        
         message, user = UserDAO.get_user_by_username(username)
         hash = UserDAO.get_password_by_user(username)
         hash = hash.encode('utf-8')
         passwordbyte = password.encode('utf-8')
 
         if bcrypt.checkpw(passwordbyte, hash):
-            print("ok---------------------------------------------------------")
             # User authenticated successfully
             session["username"] = username
             return render_template("index.html", username=username)
