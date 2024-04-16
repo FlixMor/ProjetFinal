@@ -96,13 +96,14 @@
 
 .container-acc-left {
     flex: 1;
-    background-color: #ffc80098;
+    background-color: rgba(0, 135, 25, 0.649);
     /* Example background color */
-    border: 4px double #038e2cbd;
+    border: 7px double #000000;
     /* Example border */
     padding: 20px;
     /* Example padding */
-    transition: background-color ease 0.4s, border ease 0.4s;
+    border-radius: 20px;
+    transition: border ease 0.4s;
 }
 
 .container-acc-left h2 {
@@ -111,33 +112,25 @@
 
 .container-acc-left:hover {
     flex: 1;
-    background-color: #e1b207a4;
     /* Example background color */
-    border: 4px double #ffffffd5;
+    border: 7px double #ffffffd5;
     /* Example border */
 }
 
-.container-acc-left> #accDivButton {
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-size: 35px;
-    color: rgba(37, 100, 0, 0.753);
-    margin: 2px;
-    border-bottom: 6px groove rgba(37, 100, 0, 0.753);
-    border-top: 6px groove rgba(37, 100, 0, 0.753);
-    border-radius: 20px;
-    transition: background-color 0.6s ease, border-radius 0.6s ease, font-size 0.6s ease, color 0.6s ease, border 0.6s ease;
-}
-
-.container-acc-left> #accDivButton:hover {
+.container-acc-left> #accDivHeader {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 35px;
     color: #ffffff;
     margin: 2px;
     border-bottom: 6px groove #ffffff;
-    border-top: 6px groove rgb(255, 255, 255);
+    border-top: 6px groove #ffffff;
     border-radius: 50px;
 }
 
-.container-acc-left>#accDivData {
-    color: black;
+.container-acc-left> #accDivData {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 20px;
+    color: #000000;
+    margin: 50px;
+    border-bottom: 1px solid #ffffff;
 }
