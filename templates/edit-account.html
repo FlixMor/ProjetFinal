@@ -1,0 +1,61 @@
+{% extends "default.html" %}
+
+{% block title %} Account {% endblock %}
+
+{% block content %}
+<div class="center-container" style="margin-top: 5%;">
+    <div class="edit-container" style="margin: 2%; width: 50%;">
+        <form action="/edit-account" method="post">
+            <div class="form-group" style="margin-bottom: 2%; margin-left: 7%; margin-right: 7%;">
+                <label for="nom_complet">Full Name:</label>
+                <input type="text" class="form-control" id="nom_complet" name="nom_complet"
+                    placeholder="{{ user.nom_complet }}">
+            </div>
+            <div class="form-group" style="margin-bottom: 2%; margin-left: 7%; margin-right: 7%;">
+                <label for="username">Username:</label>
+                <input type="text" class="form-control" id="username" name="username"
+                    placeholder="{{ user.username }}">
+            </div>
+            <div class="form-group" style="margin-bottom: 2%; margin-left: 7%; margin-right: 7%;">
+                <label for="courriel">Email:</label>
+                <input type="email" class="form-control" id="courriel" name="courriel" placeholder="{{ user.courriel }}">
+            </div>
+            <div class="form-group" style="margin-bottom: 2%; margin-left: 7%; margin-right: 7%;">
+                <label for="phone">Phone Number:</label>
+                <input type="tel" class="form-control" id="phone" name="phone" placeholder="{{ user.phone }}">
+            </div>
+            <div class="form-group" style="margin-bottom: 2%; margin-left: 7%; margin-right: 7%;">
+                <label for="age">Age:</label>
+                <input type="number" class="form-control" id="age" name="age" placeholder="{{ user.age }}">
+            </div>
+            <div class="center-container" style="margin-top: 3%;">
+                <button type="submit" class="btn btn-warning">Edit Account</button>
+            </div>
+        </form>
+    </div>
+    <div class="center-container">
+        <div class="center-container alert alert-{{ 'primary' if message =='info' else 'danger' }}"
+            role="alert" style="width: 300px;">
+            {% if message %}
+                {% if message == "info" %}
+                    Please fill out the forms you want to edit, then press on the "Edit" button.
+                {% elif message == "failure" %}
+                    There was an error while editing the user.
+                {% elif message == "invalidphone" %}
+                    Phone number must be in the format xxx-xxx-xxxx.
+                {% elif message == "invalidage" %}
+                    Age must be between 18 and 100.
+                {% elif message == "invalidemail" %}
+                    EMAIL
+                {% elif message == "invalidusername" %}
+                    USERNAME
+                {% elif message == "invalidname" %}
+                    Name
+                {% else %}
+                    {{ message }}
+                    WTF
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

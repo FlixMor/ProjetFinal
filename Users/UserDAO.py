@@ -144,4 +144,17 @@ class UserDAO:
             message = "failure"
             return message
         
+    @classmethod
+    def update_all(cls, username, new_nomComplet, new_courriel,new_username, new_age, new_phone):
+        sql = "UPDATE user SET nom_complet=%s, courriel=%s, username=%s, age=%s, phone=%s WHERE username = %s"
+        params = (new_nomComplet, new_courriel, new_username, new_age, new_phone, username)
+        try:
+            UserDAO.cursor.execute(sql,params)
+            UserDAO.connexion.commit()
+            message = "success"
+            return message
+        except Exception as error:
+            message = "failure"
+            return message
+        
     

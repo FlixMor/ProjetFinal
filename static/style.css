@@ -155,3 +155,23 @@
 .accDivDataRow span {
     flex-grow: 1; /* Allow the data to grow and occupy remaining space */
 }
+
+.edit-container {
+    color: white;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background-color: #5757579b; /* Light gray background */
+    border: 1px solid #ff9900; /* Border color */
+    border-radius: 5px; /* Rounded corners */
+    padding: 40px; /* Padding inside the container */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow for a subtle elevation effect */
+}   
+
+.edit-container button{
+    color: rgb(255, 191, 0);
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background-color: #5757579b; /* Light gray background */
+    border: 1px solid #ced4da; /* Border color */
+    border-radius: 40px; /* Rounded corners */
+    padding: 20px; /* Padding inside the container */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow for a subtle elevation effect */
+}   
