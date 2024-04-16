@@ -30,6 +30,20 @@ class UserDAO:
             user = None
             message = "failure"
             return (message, user) 
+        
+    @classmethod # # Utilisé dans le app.py/login pour vérifier si l'utilisateur existe
+    def get_password_by_user(cls, username):
+        sql = "SELECT PASSWORD FROM user WHERE username = %s"
+
+        try:
+            cls.cursor.execute(sql, (username,))
+            passw = cls.cursor.fetchone()
+            return passw[0]
+        except Exception as error:
+            passw = None
+            return passw 
+
+
 
     # UPDATE NOM_COMPLET    entres = objet User , new_nom_complet 
     @classmethod

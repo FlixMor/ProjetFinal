@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session
-from flask_bcrypt import Bcrypt  # Utilisé pour le hashage des mots de passes #
-
+#from flask_bcrypt import Bcrypt  # Utilisé pour le hashage des mots de passes #
+import bcrypt
 from Users.User import User
 from Users.UserDAO import UserDAO
 
@@ -18,10 +18,10 @@ load_dotenv() # Chargement des variables d'environnement du fichier .env
 
 app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY')
-bcrypt = Bcrypt(app)  
+#bcrypt = Bcrypt(app)  
 
 phone_pattern = re.compile(r'^\d{3}-\d{3}-\d{4}$')
-
+salt = (bcrypt.gensalt(rounds = 12))
 
 # # # HOME # # #
 @app.route('/')
@@ -47,21 +47,23 @@ def login():
         return redirect(url_for("logout"))
 
     if request.method == "POST":
+        req = request.form
         username = request.form["username"]
         password = request.form["password"]
-
+        
         message, user = UserDAO.get_user_by_username(username)
-        
-        if message == "success":
-            if user and user[4] == password:  # Assuming password is stored in the 5th column
-                # User authenticated successfully
-                session["username"] = username
-                return render_template("index.html", username=username)
-            else:
-                message = "Invalid username or password"
+        hash = UserDAO.get_password_by_user(username)
+        hash = hash.encode('utf-8')
+        passwordbyte = password.encode('utf-8')
+
+        if bcrypt.checkpw(passwordbyte, hash):
+            print("ok---------------------------------------------------------")
+            # User authenticated successfully
+            session["username"] = username
+            return render_template("index.html", username=username)
         else:
-            message = "User not found"
-        
+            message = "Invalid username or password"
+
         return render_template("login.html", message=message)
     else:
         message = "info"
@@ -95,7 +97,12 @@ def register():
         nom_complet = req['fullname']
         courriel = req['email']
         username = req['username']
-        password = bcrypt.generate_password_hash(req['password']).decode('utf-8')
+        password = req['password']
+        #password = bcrypt.generate_password_hash((req['password']).encode('utf-8'))
+        #salt = bcrypt.gensalt(rounds=12)
+        #password = bcrypt.hashpw(password, salt)
+
+        #bcrypt.
         age = req['age']
         phone = req['phone']
         usertype = "basic"
@@ -113,6 +120,8 @@ def register():
             return render_template('register.html', message=message)
         
         else:    
+            passwordbyte = password.encode('utf-8')
+            password = bcrypt.hashpw(passwordbyte, salt)
             user = User(nom_complet, courriel, username, password, age, phone, usertype)
             message = UserDAO.add(user)
     else:
