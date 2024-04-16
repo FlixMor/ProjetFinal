@@ -77,8 +77,8 @@ class EventDAO:
     # UPDATE CATEGORIE
     @classmethod
     def update_categorie(cls,event:Event,new_categorie):
-        sql = "UPDATE event SET categorie = %s WHERE categorie = %s"
-        params = (new_categorie,event.categorie)
+        sql = "UPDATE event SET categorie = %s WHERE nom = %s"
+        params = (new_categorie,event.nom)
         try:
             EventDAO.cursor.execute(sql,params)
             EventDAO.connexion.commit()
@@ -91,8 +91,8 @@ class EventDAO:
     # UPDATE PLACE_DISPO
     @classmethod
     def update_place_dispo(cls,event:Event,new_place_dispo):
-        sql = "UPDATE event SET place_dispo = %s WHERE place_dispo = %s"
-        params = (new_place_dispo,event.place_dispo)
+        sql = "UPDATE event SET place_dispo = %s WHERE nom = %s"
+        params = (new_place_dispo,event.nom)
         try:
             EventDAO.cursor.execute(sql,params)
             EventDAO.connexion.commit()
@@ -105,8 +105,8 @@ class EventDAO:
     # UPDATE DATE
     @classmethod
     def update_date(cls,event:Event,new_date):
-        sql = "UPDATE event SET date = %s WHERE date = %s"
-        params = (new_date,event.date)
+        sql = "UPDATE event SET date = %s WHERE nom = %s"
+        params = (new_date,event.nom)
         try:
             EventDAO.cursor.execute(sql,params)
             EventDAO.connexion.commit()
@@ -119,8 +119,8 @@ class EventDAO:
     # UPDATE PRIX
     @classmethod
     def update_prix(cls,event:Event,new_prix):
-        sql = "UPDATE event SET prix = %s WHERE prix = %s"
-        params = (new_prix,event.prix)
+        sql = "UPDATE event SET prix = %s WHERE nom = %s"
+        params = (new_prix,event.nom)
         try:
             EventDAO.cursor.execute(sql,params)
             EventDAO.connexion.commit()
@@ -133,8 +133,8 @@ class EventDAO:
     # UPDATE phone    entres = objet User , new_phone
     @classmethod
     def update_artiste(cls,event:Event,new_artiste):
-        sql = "UPDATE event SET artiste = %s WHERE artiste = %s"
-        params = (new_artiste,event.artiste)
+        sql = "UPDATE event SET artiste = %s WHERE nom = %s"
+        params = (new_artiste,event.nom)
         try:
             EventDAO.cursor.execute(sql,params)
             EventDAO.connexion.commit()

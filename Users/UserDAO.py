@@ -37,7 +37,7 @@ class UserDAO:
     @classmethod # # Utilisé dans le app.py/login pour vérifier si l'utilisateur existe
     def get_password_by_user(cls, username):
         sql = "SELECT PASSWORD FROM user WHERE username = %s"
-
+                
         try:
             cls.cursor.execute(sql, (username,))
             passw = cls.cursor.fetchone()
