@@ -6,12 +6,12 @@
 <div class="container" style="margin-top: 70px; display: flex;">
     <!-- Left container -->
     <div class="container-acc-left" style="height: 600px;">
-        <a id="accDivButton"style="width: 300px;">My Account </a>
-        <div class="center-container">Full Name :</div>
-        <div class="center-container">Username :</div>
-        <div class="center-container">Mail :</div>
-        <div class="center-container">Phone Number :</div>
-        <div class="center-container">Age : </div>
+        <a class="center-container" id="accDivHeader">My Account </a>
+        <div id="accDivData">Full Name:<a style="justify-content: center; display: flex; text-align: center;">{{ user[1] }}</a></div>
+        <div id="accDivData">Username: {{ user[3] }}</div>
+        <div id="accDivData">Mail: {{ user[2] }}</div>
+        <div id="accDivData">Phone Number: {{ user[6] }}</div>
+        <div id="accDivData">Age: {{ user[5] }}</div>
     </div>
     <!-- Right container (optional) -->
     <div class="container-right">
