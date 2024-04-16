@@ -7,7 +7,7 @@
     {% if message %}
     <div class="center-container">
         <div class="center-container alert alert-{{ 'info' if message == 'info' else 'danger' }}" role="alert" style="width: 300px;">
-            {% if message == "Invalid username or password" %}
+            {% if message == "invalidUsernamePassword" %}
             Invalid username or password.
             {% elif message == "User not found" %}
             User not found.

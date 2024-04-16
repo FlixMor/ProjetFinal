@@ -75,7 +75,7 @@
     background-color: #000;
     color: #fff;
     border: none;
-    border-radius: 5px;
+    border-radius: 5px; 
     cursor: pointer;
 }
 
@@ -84,7 +84,7 @@
 }
 
 .login-container:hover {
-    background-color: #0e3c10db;
+    background-color: #0c440c91;
     border-radius: 30px;
 }
 
@@ -133,4 +133,25 @@
     color: #000000;
     margin: 50px;
     border-bottom: 1px solid #ffffff;
+}
+
+.accDivDataRow {
+    display: flex;
+    align-items: center;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 20px;
+    color: #333; /* Dark gray color */
+    margin-bottom: 18px;
+    padding: 10px; /* Add padding for better spacing */
+    border-bottom: 1px solid #ccc; /* Light gray border */
+}
+
+.accDivDataRow strong {
+    width: 200px; /* Adjust the width as needed */
+    font-weight: bold; /* Make the label bold */
+    margin-right: 25px; /* Add space between label and data */
+}
+
+.accDivDataRow span {
+    flex-grow: 1; /* Allow the data to grow and occupy remaining space */
 }

@@ -1,5 +1,6 @@
 class User:
     def __init__(self, nom_complet, courriel, username, password, age, phone, usertype):
+        self.__id = None
         self.__nom_complet = nom_complet
         self.__courriel = courriel
         self.__username = username
