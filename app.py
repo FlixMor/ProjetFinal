@@ -117,60 +117,45 @@ def edit_account():
         message, user_data = UserDAO.get_user_by_username(session["username"])
         if message == "success":
             if request.method == 'POST':
-                new_name = request.form['nom_complet']  
-                new_username = request.form['username']
-                new_email = request.form['courriel']
-                new_phone = request.form['phone']
-                new_age = request.form['age']
+                new_name = request.form.get('nom_complet', user_data.nom_complet)  
+                new_username = request.form.get('username', user_data.username)
+                new_email = request.form.get('courriel', user_data.courriel)
+                new_phone = request.form.get('phone', user_data.phone)
+                new_age = request.form.get('age', user_data.age)
 
-                if new_name != user_data.nom_complet:
-                    if 5 <= len(new_name) <= 20  and new_name is not None:
-                        pass    
-                    else:
-                        message = 'invalidname'
-                        return render_template('edit-account.html', message=message, user=user_data)
+                if new_name != user_data.nom_complet and (5 > len(new_name) or len(new_name) > 20):
+                    return render_template('edit-account.html', message='invalidname', user=user_data)
 
-                elif new_username != user_data.username:
-                    if 3 <= len(new_username) <= 20  and new_username is not None:
-                        pass 
-                    else:
-                        message = 'invalidusername'
-                        return render_template('edit-account.html', message=message, user=user_data)
+                if new_username != user_data.username and (3 > len(new_username) or len(new_username) > 20):
+                    return render_template('edit-account.html', message='invalidusername', user=user_data)
 
-                elif new_email != user_data.courriel:
-                    if 5 <= len(new_email) <= 30 and email_pattern.match(new_email) and new_email is not None:
-                        pass    
-                    else:
-                        message = 'invalidemail'
-                        return render_template('edit-account.html', message=message, user=user_data)
+                if new_email != user_data.courriel and (10 > len(new_email) or len(new_email) > 30 or not email_pattern.match(new_email)):
+                    return render_template('edit-account.html', message='invalidemail', user=user_data)
                     
-                elif new_phone != user_data.phone:
-                    if phone_pattern.match(new_phone) and new_phone is not None:
-                        pass    
-                    else:
-                        message = 'invalidphone'
-                        return render_template('edit-account.html', message=message, user=user_data)
+                if new_phone != user_data.phone and (not phone_pattern.match(new_phone)):
+                    return render_template('edit-account.html', message='invalidphone', user=user_data)
                     
-                elif new_age != user_data.age:
-                    if (18 <= int(new_age) <= 100) and new_age.isdigit() and new_age is not 0:
-                        pass
-                    else:
-                        message = 'invalidage'
-                        return render_template('edit-account.html', message=message, user=user_data)
-                                        
+                if new_age != user_data.age and (not 18 <= int(new_age) <= 100 or not new_age.isdigit()):
+                    return render_template('edit-account.html', message='invalidage', user=user_data)
+
                 try:
-                    UserDAO.update_nom_complet(user_data, new_name)   
-                    UserDAO.update_courriel(user_data, new_email) 
-                    UserDAO.update_phone(user_data, new_phone) 
-                    UserDAO.update_age(user_data, new_age)
-                    session["username"] = new_username
-                    UserDAO.update_username(user_data, new_username) 
+                    if new_name != user_data.nom_complet:
+                        UserDAO.update_nom_complet(user_data, new_name)   
+                    if new_email != user_data.courriel:
+                        UserDAO.update_courriel(user_data, new_email) 
+                    if new_phone != user_data.phone:
+                        UserDAO.update_phone(user_data, new_phone) 
+                    if new_age != user_data.age:
+                        UserDAO.update_age(user_data, new_age)
+                    if new_username != user_data.username:
+                        session["username"] = new_username
+                        UserDAO.update_username(user_data, new_username) 
                     return redirect(url_for('account'))
                 except Exception as error:
                     print(error)
                     message = "failure"
-                    return render_template('edit-account.html', message=message, user=user_data)                            
-            # For GET request or failed POST request, render the template   
+                    return render_template('edit-account.html', message=message, user=user_data)
+                                
             else:
                 message = "info"
                 return render_template('edit-account.html', message=message, user=user_data)
