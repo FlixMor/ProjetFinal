@@ -29,6 +29,7 @@
     border-radius: 10px;
     margin-right: 50px;
     transition: background-color 0.6s ease, border-radius 0.6s ease, font-size 0.6s ease, color 0.6s ease;
+    box-shadow: 0 10px 100px rgb(0, 0, 0);
 }
 
 .company-name:hover {
@@ -44,6 +45,7 @@
     border-radius: 10px;
     padding: 20px;
     margin: 0 auto;
+    box-shadow: 0 10px 150px rgb(0, 84, 0);
     transition: background-color 0.5s ease, border-radius 0.5s ease;
 }
 
@@ -75,7 +77,7 @@
     background-color: #000;
     color: #fff;
     border: none;
-    border-radius: 5px; 
+    border-radius: 5px;
     cursor: pointer;
 }
 
@@ -95,8 +97,7 @@
 }
 
 .container-acc-left {
-    flex: 1;
-    background-color: rgba(0, 135, 25, 0.649);
+    background-color: #5757579b;
     /* Example background color */
     border: 7px double #000000;
     /* Example border */
@@ -111,13 +112,10 @@
 }
 
 .container-acc-left:hover {
-    flex: 1;
-    /* Example background color */
     border: 7px double #ffffffd5;
-    /* Example border */
 }
 
-.container-acc-left> #accDivHeader {
+.container-acc-left>#accDivHeader {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 35px;
     color: #ffffff;
@@ -125,9 +123,10 @@
     border-bottom: 6px groove #ffffff;
     border-top: 6px groove #ffffff;
     border-radius: 50px;
+    box-shadow: 0 10px 150px rgb(255, 255, 255);
 }
 
-.container-acc-left> #accDivData {
+.container-acc-left>#accDivData {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 20px;
     color: #000000;
@@ -140,38 +139,132 @@
     align-items: center;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 20px;
-    color: #333; /* Dark gray color */
+    color: #333;
     margin-bottom: 18px;
-    padding: 10px; /* Add padding for better spacing */
-    border-bottom: 1px solid #ccc; /* Light gray border */
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
 }
 
 .accDivDataRow strong {
-    width: 200px; /* Adjust the width as needed */
-    font-weight: bold; /* Make the label bold */
-    margin-right: 25px; /* Add space between label and data */
+    width: 200px;
+    font-weight: bold;
+    margin-right: 25px;
 }
 
 .accDivDataRow span {
-    flex-grow: 1; /* Allow the data to grow and occupy remaining space */
+    flex-grow: 1;
 }
 
 .edit-container {
     color: white;
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    background-color: #5757579b; /* Light gray background */
-    border: 1px solid #ff9900; /* Border color */
-    border-radius: 5px; /* Rounded corners */
-    padding: 40px; /* Padding inside the container */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow for a subtle elevation effect */
-}   
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background-color: #5757579b;
+    border: 1px solid #ff9900;
+    border-radius: 5px;
+    padding: 40px;
+    box-shadow: 0 10px 100px rgba(255, 140, 0, 0.765);
+}
 
-.edit-container button{
+.edit-container button {
     color: rgb(255, 191, 0);
-    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    background-color: #5757579b; /* Light gray background */
-    border: 1px solid #ced4da; /* Border color */
-    border-radius: 40px; /* Rounded corners */
-    padding: 20px; /* Padding inside the container */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Shadow for a subtle elevation effect */
-}   
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    background-color: #5757579b;
+    border: 1px solid #ced4da;
+    border-radius: 40px;
+    padding: 20px;
+    box-shadow: 0 10px 150px rgb(0, 84, 0);
+}
+
+.carousel-container {
+    width: 100%;
+    max-width: 700px;
+    /* Adjust the maximum width as needed */
+    margin-left: 8%;
+    border: 10px double rgba(0, 68, 0, 0.649);
+    box-shadow: 0 10px 150px rgb(0, 84, 0);
+    border-radius: 5px;
+}
+
+.carousel {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    /* Adjust the height as needed */
+    overflow: hidden;
+}
+
+.carousel-images {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.carousel-images img {
+    width: 100%;
+    height: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    /* Add a transition for opacity */
+}
+
+.carousel-images img.active,
+.carousel-images img:first-child {
+    /* Set the initial state of the first slide */
+    opacity: 1;
+}
+
+.prev,
+.next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 2;
+}
+
+.prev {
+    left: 0;
+}
+
+.next {
+    right: 0;
+}
+
+.about-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 50px;
+    border: double 1px rgb(191, 0, 255);
+    box-shadow: 20px 25px 150px rgba(251, 151, 1, 0.708),
+    20px 25px 150px rgba(255, 255, 255, 0.708), /* Right shadow */
+        -20px -25px 150px rgba(0, 232, 12, 0.708); /* Left shadow */
+}
+
+.about-details {
+    margin-bottom: 30px;
+}
+
+.about-details h2,
+.about-owners h2,
+.about-company h2 {
+    border-bottom: 2px solid #333;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.about-owners p {
+    margin-bottom: 10px;
+}
+
+.about-company p {
+    line-height: 1.6;
+}
