@@ -1,4 +1,4 @@
-from Reservation import Reservation
+from Reservations import Reservation
 from Users.User import User
 from Events.Event import Event
 from Events.EventDAO import EventDAO
@@ -15,24 +15,28 @@ class ReservationDAO:
 
     @classmethod
     def add(cls,user:User,event:Event,seat):
-        sql = "INSERT INTO reservation (username, event, place, statut) VALUES(%s, %s, %s, %s)"
-        params = (user.username, event.nom, seat,'unpaid')
+        sql = "INSERT INTO reservation (username, event, place, statut) VALUES (%s, %s, %s, %s)"
+        event_name = event[0]
+        params = (user.username, event_name[0], seat,'unpaid')
         try:
             cls.cursor.execute(sql, params)
-            cls.connexion.commit()
-            sql = "SELECT place_dispo from event WHERE nom =%s"
-            cls.cursor.execute(sql, (event.nom,))
-            place_dispo = cls.cursor.fetchone()
-            if place_dispo[0] == 0:
-                message = "failure"
+            sql2 = "SELECT place_dispo from event WHERE nom =%s"
+            cls.cursor.execute(sql2, (event_name[0],))
+            place_dispo = cls.cursor.fetchall()
+            place_disp = place_dispo[0]
+            if place_disp[0] <= 0:
+                message = "failure place"
                 return message
             else:
-                sql = "UPDATE event SET place_dispo =%s WHERE nom =%s"
-                cls.cursor.execute(sql, (place_dispo[0]-1,event.nom))
+                sql3 = "UPDATE event SET place_dispo =%s WHERE nom =%s"
+                place_restante = place_disp[0] - seat
+                params2 = (place_restante,event_name[0])
+                cls.cursor.execute(sql3,params2)
+                cls.connexion.commit()
                 message = "success"
                 return message
         except Exception as error:
-            message = "failure"
+            message = "failure tout court"
             return message
         
 
@@ -40,18 +44,22 @@ class ReservationDAO:
     def del_reservation(cls,user:User,event:Event):
         sql = "DELETE FROM reservation WHERE username =%s AND event =%s"
         try:
-            message = EventDAO.get_event_by_name(user.username)
-            EventDAO.cursor.execute(sql, (user.username,event.nom))
-            EventDAO.connexion.commit()
-            return message == "success"
+            event_name = event[0]
+            params = (user.username, event_name[0])
+            cls.cursor.execute(sql, params)
+            cls.connexion.commit()
+            message = "success"
+            return message
         except ValueError as error:
-            return message == "failure"
+            message = "failure"
+            return message
         
     @classmethod
     def get_reservation_by_user(cls,user:User):
         sql = "SELECT * FROM reservation WHERE username =%s"
         try:
-            cls.cursor.execute(sql, (user.username,))
+            params= (user.username,)
+            cls.cursor.execute(sql, params)
             result = cls.cursor.fetchall()
             return result
         except ValueError as error:
