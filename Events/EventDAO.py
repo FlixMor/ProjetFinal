@@ -36,13 +36,13 @@ class EventDAO:
         sql = "SELECT * FROM event WHERE nom = %s"
         try:
             cls.cursor.execute(sql, (nom,))
-            event:Event = cls.cursor.fetchone()
+            event = cls.cursor.fetchall()
             message = "success"
-            return (message, event)
+            return message, event
         except Exception as error:
             event = None
             message = "failure"
-            return (message, event)
+            return message, event
         
     @classmethod
     def list_event(cls):
