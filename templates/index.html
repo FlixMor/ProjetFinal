@@ -4,5 +4,68 @@
 
 {% block content %}
 
+<div class="row" style="margin-top: 6%;">
+    <div class="col-md-6">
+        <div class="carousel-container" style="margin-top: 7%;">
+            <div class="carousel">
+                <div class="carousel-images">
+                    <img src="/static/images/image-01.jpg" alt="Image 1">
+                    <img src="/static/images/image-02.jpg" alt="Image 2">
+                    <img src="/static/images/image-03.jpg" alt="Image 3">
+                    <img src="/static/images/image-04.jpg" alt="Image 4">
+                    <img src="/static/images/image-05.jpg" alt="Image 5">
+                    <!-- Add more images as needed -->
+                </div>
+                <button class="prev" onclick="prevSlide()">&#10094;</button>
+                <button class="next" onclick="nextSlide()">&#10095;</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5 center-container"
+        style="border-right: 2px solid green; border-left: 2px solid green; margin: auto; padding: 20px; margin-right: 7%;">
+        <div class="home-page-info">
+            <h2>Welcome to Event MSP - Your Premier Entertainment Experience</h2>
+            <p>At Event MSP, we specialize in curating unforgettable entertainment experiences that captivate audiences
+                and leave lasting impressions. As industry leaders in event production, we pride ourselves on delivering
+                exceptional musical shows, festivals, comedy performances, theater productions, and much more.</p>
+            <p>With a passion for creativity and a dedication to excellence, Event MSP brings together top talent from
+                across the globe to create spectacles that transcend expectations. Whether you're seeking an
+                electrifying concert, a laughter-filled comedy show, or an immersive theatrical experience, we have
+                something to offer every taste and preference.</p>
+            <p>Our team of seasoned professionals works tirelessly behind the scenes to ensure seamless execution from
+                conception to curtain call. From venue selection and artist booking to stage design and technical
+                production, we handle every detail with precision and care, allowing you to sit back, relax, and enjoy
+                the show.</p>
+            <p>Join us at Event MSP and embark on a journey through the wonders of live entertainment. Let us elevate
+                your event experience and bring your vision to life in ways you never thought possible.
+                Experience the magic of Event MSP. Your unforgettable entertainment journey starts here.</p>
+        </div>
+    </div>
+</div>
 
+<script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.carousel-images img');
+
+    function showSlide(index) {
+        slides.forEach((slide, i) => {
+            if (i === index) {
+                slide.classList.add('active');
+            } else {
+                slide.classList.remove('active');
+            }
+        });
+    }
+
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+    }
+
+    function prevSlide() {
+        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+        showSlide(currentSlide);
+    }
+
+</script>
 {% endblock %}
