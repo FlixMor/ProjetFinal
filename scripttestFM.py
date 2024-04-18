@@ -10,6 +10,8 @@ from Paiements.PaiementDAO import PaiementDAO
 
 message, user = UserDAO.get_user_by_username('allo')
 message2, event = EventDAO.get_event_by_name('Evenement')
+#events = Event('Soiree douce','Humour',75,'2025-01-01','56$','Martin Matte')
+#messages = EventDAO.add(events)
 #carte = Paiement('allo','454548644896','45868')
 #EventDAO.update_place_dispo(event,50)
 #message = ReservationDAO.add(user,event,15)
@@ -19,4 +21,3 @@ message2, event = EventDAO.get_event_by_name('Evenement')
 #message = PaiementDAO.pay(user,event)
 #message = PaiementDAO.del_pay(user)
 #message = PaiementDAO.get_pay_by_user(user)
-print(message)

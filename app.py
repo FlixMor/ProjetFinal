@@ -208,7 +208,7 @@ def delete_account():
 def events():
     if 'username' in session:
         # Récupération des events
-        message, events = EventDAO.list_event()
+        message, events = EventDAO.list_all()
         return render_template('events.html', username=session["username"], event=events)
     else:
         return redirect(url_for('login'))

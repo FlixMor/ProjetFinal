@@ -18,13 +18,17 @@ class ReservationDAO:
         sql = "INSERT INTO reservation (username, event, place, statut) VALUES (%s, %s, %s, %s)"
         params = (user.username, event.nom, seat,'unpaid')
         try:
-            cls.cursor.execute(sql, params)
-            cls.connexion.commit()
-            sql2 = "SELECT place_dispo from event WHERE nom =%s"
-            cls.cursor.execute(sql2, (event.nom,))
-            place_dispo = cls.cursor.fetchall()
-            place_disp = place_dispo[0]
-            
+            if seat > event.place_dispo:
+                message = "failure place"
+                return message
+            else:
+                cls.cursor.execute(sql, params)
+                cls.connexion.commit()
+                sql2 = "SELECT place_dispo from event WHERE nom =%s"
+                cls.cursor.execute(sql2, (event.nom,))
+                place_dispo = cls.cursor.fetchall()
+                place_disp = place_dispo[0]
+
             if place_disp[0]-seat <= 0:
                 message = "failure place"
                 return message
@@ -44,15 +48,34 @@ class ReservationDAO:
     @classmethod
     def del_reservation(cls,user:User,event:Event):
 
-        sql = "DELETE FROM reservation WHERE username =%s AND event =%s"
+        sql = "SELECT place FROM reservation WHERE username = %s AND event =%s"
+        params = (user.username,event.nom)
         try:
-            params = (user.username, event.nom)
             cls.cursor.execute(sql, params)
+            place_prise = cls.cursor.fetchall()
+        except ValueError as error:
+            message = "failure"
+            return message
+        sql2 = "DELETE FROM reservation WHERE username =%s AND event =%s"
+        try:
+            cls.cursor.execute(sql2, params)
             cls.connexion.commit()
-            sql2 = "SELECT place_dispo FROM reservation where nom = %s"
-            cls.cursor.execute(sql2, (event.nom,))
+        except ValueError as error:
+            message = "failure"
+            return message
+        try:
+            sql3 = "SELECT place_dispo FROM event WHERE nom=%s"
+            cls.cursor.execute(sql3, (event.nom,))
             place_dispo = cls.cursor.fetchall()
-            ###
+            place_restante = place_dispo[0][0] + place_prise[0][0]
+        except ValueError as error:
+            message = "failure"
+            return message
+        try:
+            sql4 = "UPDATE event SET place_dispo = %s WHERE nom=%s"
+            params4 = (place_restante,event.nom)
+            cls.cursor.execute(sql4, params4)
+            cls.connexion.commit()
             message = "success"
             return message
         except ValueError as error:

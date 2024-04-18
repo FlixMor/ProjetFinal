@@ -35,10 +35,9 @@ class UserDAO:
             return ("failure", None)
         
 
-    @classmethod # # Utilisé dans le app.py/login pour vérifier si l'utilisateur existe
+    @classmethod # # Utilisé dans le app.py/login pour get le hash de la database
     def get_password_by_user(cls, username):
         sql = "SELECT PASSWORD FROM user WHERE username = %s"
-                
         try:
             cls.cursor.execute(sql, (username,))
             passw = cls.cursor.fetchone()
@@ -47,7 +46,7 @@ class UserDAO:
             passw = None
             return passw 
 
-    # UPDATE NOM_COMPLET    entres = objet User , new_nom_complet 
+    # UPDATE NOM_COMPLET 
     @classmethod
     def update_nom_complet(cls,user:User,new_nom_complet):
         sql = "UPDATE user SET nom_complet = %s WHERE username = %s"
@@ -61,7 +60,7 @@ class UserDAO:
             message = "failure"
             return message
         
-    # UPDATE COURRIEL    entres = objet User , new_courriel 
+    # UPDATE COURRIEL 
     @classmethod
     def update_courriel(cls,user:User,new_courriel):
         sql = "UPDATE user SET courriel = %s WHERE username = %s"
@@ -75,7 +74,7 @@ class UserDAO:
             message = "failure"
             return message
         
-    # UPDATE USERNAME    entres = objet User , new_username
+    # UPDATE USERNAME
     @classmethod
     def update_username(cls,user:User,new_username):
         sql = "UPDATE user SET username = %s WHERE username = %s"
@@ -89,7 +88,7 @@ class UserDAO:
             message = "failure"
             return message
         
-    # UPDATE password    entres = objet User , new_password
+    # UPDATE password
     @classmethod
     def update_password(cls,user:User,new_password):
         sql = "UPDATE user SET password = %s WHERE username = %s"
@@ -103,7 +102,7 @@ class UserDAO:
             message = "failure"
             return message
         
-    # UPDATE age    entres = objet User , new_age
+    # UPDATE age
     @classmethod
     def update_age(cls,user:User,new_age):
         sql = "UPDATE user SET age = %s WHERE username = %s"
@@ -117,7 +116,7 @@ class UserDAO:
             message = "failure"
             return message
     
-    # UPDATE phone    entres = objet User , new_phone
+    # UPDATE phone
     @classmethod
     def update_phone(cls,user:User,new_phone):
         sql = "UPDATE user SET phone = %s WHERE username = %s"
