@@ -1,5 +1,6 @@
 from Users.User import User
 import database
+import re
 
 class UserDAO:
     connexion = database.connexion_db()
@@ -144,17 +145,31 @@ class UserDAO:
             message = "failure"
             return message
         
-    @classmethod
-    def update_all(cls, username, new_nomComplet, new_courriel,new_username, new_age, new_phone):
-        sql = "UPDATE user SET nom_complet=%s, courriel=%s, username=%s, age=%s, phone=%s WHERE username = %s"
-        params = (new_nomComplet, new_courriel, new_username, new_age, new_phone, username)
+    # VALID PASSWORD ENTRY
+    @classmethod  
+    def valid_password(password):
+        # Check if password has at least 6 characters
+        if len(password) < 6:
+            return False
+        # Check if password contains at least one capital letter
+        if not re.search(r'[A-Z]', password):
+            return False
+        # Check if password contains at least one number
+        if not re.search(r'\d', password):
+            return False
+        return True
+    
+    # CHECK IF ADMIN
+    @staticmethod
+    def is_admin(username):
+        sql = "SELECT usertype FROM user WHERE username = %s"
+        params = (username,)
         try:
             UserDAO.cursor.execute(sql,params)
-            UserDAO.connexion.commit()
-            message = "success"
-            return message
+            usertype = UserDAO.cursor.fetchone()
+            if usertype[0] =="admin":
+                return True
+            else:
+                return False
         except Exception as error:
-            message = "failure"
-            return message
-        
-    
+            return False

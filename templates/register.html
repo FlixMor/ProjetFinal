@@ -6,17 +6,27 @@
 <div class="container" style="margin-top: 70px;">
     {% if message %}
     <div class="center-container">
-        <div class="center-container alert alert-{{ 'primary' if message == 'info' else 'success' if message == 'success' else 'danger' }}" role="alert" style="width: 400px;">
+        <div class="center-container alert alert-{{ 'primary' if message == 'info' else 'success' if message == 'success' else 'danger' }}"
+            role="alert" style="width: 400px;">
             {% if message == "info" %}
-            Please fill out the forms.
+            Please fill out the forms you want to edit, then press on the "Edit" button.
             {% elif message == "success" %}
-            Added successfully.
+            User added successfully! 
             {% elif message == "failure" %}
-            There was an error while adding the user.
+            ERROR - There was an error while editing the user.
             {% elif message == "invalidphone" %}
-            Phone number must be in the format xxx-xxx-xxxx.
+            ERROR - Phone number must be in the format xxx-xxx-xxxx.
             {% elif message == "invalidage" %}
-            Age must be between 18 and 100.
+            ERROR - Age must be between 18 and 100.
+            {% elif message == "invalidemail" %}
+            ERROR - Email must be between 10 and 30 characters and it musts be in the format mail@mail.com !
+            {% elif message == "invalidusername" %}
+            ERROR - Username must be between 3 and 20 characters !
+            {% elif message == "invalidname" %}
+            ERROR - Full name must be between 5 and 20 characters !
+            {% elif message == "invalidpassword" %}
+            ERROR - The password must be between 6 and 20 characters. It must contains at
+            least one uppercase letter and one number.
             {% endif %}
         </div>
     </div>
@@ -43,14 +53,17 @@
             <div class="mb-4">
                 <label for="phone" class="form-label">Phone Number</label>
                 <input type="text" class="form-control" id="phone" name="phone" style="height: 30px;" required>
+                <div id="phoneHelp" class="form-text">Must be in the format xxx-xxx-xxxx </div>
             </div>
             <div class="mb-4">
                 <label for="password" class="form-label">Password</label>
                 <div class="input-group">
-                    <input type="password" class="form-control" id="password" name="password" style="height: 30px;" required>
+                    <input type="password" class="form-control" id="password" name="password" style="height: 30px;"
+                        required>
                 </div>
-                <div id="passwordHelp" class="form-text">Password is case sensitive.</div>
-                <button class="btn btn-outline-warning" type="button" id="togglePassword" style="border-radius: 15px; width: 80px; margin-top: 10px;">
+                <div id="passwordHelp" class="form-text">Password is case sensitive and must contains at least 1 number and capital letter.</div>
+                <button class="btn btn-outline-warning" type="button" id="togglePassword"
+                    style="border-radius: 15px; width: 80px; margin-top: 10px;">
                     <span id="showText">Show</span>
                     <span id="hideText" style="display: none;">Hide</span>
                 </button>
@@ -63,21 +76,21 @@
 </div>
 
 <script>
-document.getElementById('togglePassword').addEventListener('click', function() {
-    var passwordField = document.getElementById('password');
-    var showText = document.getElementById('showText');
-    var hideText = document.getElementById('hideText');
-    
-    if (passwordField.type === 'password') {
-        passwordField.type = 'text';
-        showText.style.display = 'none';
-        hideText.style.display = 'inline';
-    } else {
-        passwordField.type = 'password';
-        showText.style.display = 'inline';
-        hideText.style.display = 'none';
-    }
-});
+    document.getElementById('togglePassword').addEventListener('click', function () {
+        var passwordField = document.getElementById('password');
+        var showText = document.getElementById('showText');
+        var hideText = document.getElementById('hideText');
+
+        if (passwordField.type === 'password') {
+            passwordField.type = 'text';
+            showText.style.display = 'none';
+            hideText.style.display = 'inline';
+        } else {
+            passwordField.type = 'password';
+            showText.style.display = 'inline';
+            hideText.style.display = 'none';
+        }
+    });
 </script>
 
 {% endblock %}

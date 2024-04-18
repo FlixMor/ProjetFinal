@@ -1,0 +1,72 @@
+{% extends "default.html" %}
+
+{% block title %} Admin Panel {% endblock %}
+
+{% block content %}
+<div class="row" style="margin-top: 4%">
+    <div class="col-md-7">
+        {% if message %}
+        <div class="center-container">
+            <div class="center-container alert alert-{{ 'primary' if message == 'info' else 'success' if message == 'success' else 'danger' }}"
+                role="alert" style="width: 500px;">
+                {% if message == "info" %}
+                Please fill out the forms and then click "Add" to add a new event.
+                {% elif message == "success" %}
+                Event added successfully!
+                {% elif message == "failure" %}
+                ERROR - There was an error while adding the event.
+                {% elif message == "invalidcategory" %}
+                ERROR - Category must be between 4 and 20 characters !
+                {% elif message == "invalidplacedispo" %}
+                ERROR - Available places must be a number between 1 and 999 !
+                {% elif message == "invalidprice" %}
+                ERROR - Price must be an integer between 1 and 9999 !
+                {% elif message == "invalidartist" %}
+                ERROR - Artist must be between 4 and 20 characters !
+                {% elif message == "invalideventname" %}
+                ERROR - Event name must be between 5 and 25 characters !
+                {% elif message == "invaliddate" %}
+                ERROR - Date must be in the year-month-date format, as xxxx-xx-xx.
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+        <div class="login-container" style="max-width: 600px; margin-bottom: 50px;">
+            <form action="{{ url_for('admin_panel') }}" method="POST">
+                <h1>Add Event :</h1>
+                <div class="mb-4">
+                    <label for="eventname" class="form-label">Event Name</label>
+                    <input type="text" class="form-control" id="eventname" name="eventname" style="height: 30px;"
+                        required>
+                </div>
+                <div class="mb-4">
+                    <label for="category" class="form-label">Event Category</label>
+                    <input type="text" class="form-control" id="category" name="category" style="height: 30px;"
+                        required>
+                </div>
+                <div class="mb-4">
+                    <label for="place_dispo" class="form-label">Event's Available Places</label>
+                    <input type="number" class="form-control" id="place_dispo" name="place_dispo" style="height: 30px;"
+                        required>
+                </div>
+                <div class="mb-4">
+                    <label for="date" class="form-label">Event Date</label>
+                    <input type="date" class="form-control" id="date" name="date" style="height: 30px;" required>
+                </div>
+                <div class="mb-4">
+                    <label for="price" class="form-label">Price</label>
+                    <input type="number" class="form-control" id="price" name="price" style="height: 30px;" required>
+                </div>
+                <div class="mb-4">
+                    <label for="artist" class="form-label">Artists</label>
+                    <input type="text" class="form-control" id="artist" name="artist" style="height: 30px;"
+                        required>
+                </div>
+                <div class="center-container">
+                    <button type="submit" class="btn btn-outline-warning">Add Event</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

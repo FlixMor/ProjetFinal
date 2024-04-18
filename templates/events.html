@@ -1,0 +1,31 @@
+{% extends 'default.html' %}
+
+{% block title %} Events {% endblock %}
+
+{% block content %}
+<div class="event-page-container">
+    <!-- Big container in the middle taking 80% of the page width -->
+    <div class="events-container">
+        <h1 class="center-container" style="margin-top: 1%; margin-bottom: 3%;"> |- All Events -|</h1>
+        <!-- Loop through each event -->
+        {% for event in event %}
+        <div class="event-container">
+            <div class="event-details">
+                <div class="left-details">
+                    <h3 style="border-bottom: 1px solid black;">{{ event.nom }}</h2>
+                    <p><strong>Artist:</strong> {{ event.artiste }}</p> <!-- Assuming artiste is an attribute of the event -->
+                </div>
+                <div class="right-details">
+                    <p><strong>Category:</strong> {{ event.categorie }}</p>
+                    <p><strong>Available:</strong> {{ event.place_dispo }} spots</p>
+                    <p><strong>Date:</strong> {{ event.date }}</p>
+                    <p><strong>Price:</strong> {{ event.prix }}$</p>
+                    <!-- Add more event details as needed -->
+                    <button class="btn btn-warning">Réserver</button>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

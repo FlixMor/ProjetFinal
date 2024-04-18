@@ -244,9 +244,7 @@
     padding: 20px;
     border-radius: 50px;
     border: double 1px rgb(191, 0, 255);
-    box-shadow: 20px 25px 150px rgba(251, 151, 1, 0.708),
-    20px 25px 150px rgba(255, 255, 255, 0.708), /* Right shadow */
-        -20px -25px 150px rgba(0, 232, 12, 0.708); /* Left shadow */
+    box-shadow: 20px 25px 300px rgba(32, 56, 237, 0.523)
 }
 
 .about-details {
@@ -262,9 +260,59 @@
 }
 
 .about-owners p {
+    font-size: 13px;
     margin-bottom: 10px;
 }
 
 .about-company p {
+    font-size: 13px;
     line-height: 1.6;
+}
+
+.event-page-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px; /* Adjust margin as needed */
+}
+
+.events-container {
+    width: 80%;
+}
+
+.event-container {
+    display: flex;
+    align-items: center;
+    background-color: #f9f9f9; /* Example background color */
+    padding: 15px;
+    margin-bottom: 30px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Example box shadow */
+}
+
+
+.event-details {
+    flex-grow: 1;
+    display: flex;
+}
+
+.event-details h2 {
+    margin-bottom: 10px;
+}
+
+.left-details {
+    flex: 2 ;
+}
+
+.right-details {
+    flex: 7;
+    align-items: center; /* Vertically center the button */
+    display: flex;
+}
+
+.right-details p{
+    margin: 4%;
+}
+
+.btn {
+    align-items: center; /* Vertically center the button */
+    margin-left: auto; /* Push the button to the right */
 }

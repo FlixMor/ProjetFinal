@@ -49,6 +49,9 @@
                     ERROR - Username must be between 3 and 20 characters !
                 {% elif message == "invalidname" %}
                     ERROR - Full name must be between 5 and 20 characters !
+                {% elif message == "invalidpassword" %}
+                    ERROR - The password must be between 6 and 20 characters. It must contains at
+                    least one uppercase letter and one number.
                 {% endif %}
             {% endif %}
         </div>
