@@ -36,7 +36,8 @@ class EventDAO:
         sql = "SELECT * FROM event WHERE nom = %s"
         try:
             cls.cursor.execute(sql, (nom,))
-            event = cls.cursor.fetchall()
+            event_row = cls.cursor.fetchone()
+            event= Event(*event_row)
             message = "success"
             return message, event
         except Exception as error:
@@ -45,7 +46,7 @@ class EventDAO:
             return message, event
         
     @classmethod
-    def list_event(cls):
+    def list_all(cls):
         events = []
         sql = "SELECT * FROM event"
         try:
@@ -59,6 +60,20 @@ class EventDAO:
             nom , categorie , place_dispo , date, prix, artiste = event
             events.append({"nom":nom,"categorie":categorie,"place_dispo":place_dispo, "date":date, "prix":prix, "artiste":artiste})
         return (message,events)
+    
+    @classmethod
+    def list_by_type(cls,categorie):
+        events = []
+        sql = "SELECT * FROM event WHERE categorie = %s"
+        params = (categorie,)
+        try:
+            EventDAO.cursor.execute(sql,params)
+            event_list = EventDAO.cursor.fetchall()
+            message = "success"
+        except Exception as error:
+            event_list = []
+            message = "failure"
+
 
     # UPDATE NOM    
     @classmethod
