@@ -16,9 +16,7 @@ class ReservationDAO:
     @classmethod
     def add(cls,user:User,event:Event,seat):
         sql = "INSERT INTO reservation (username, event, place, statut) VALUES (%s, %s, %s, %s)"
-    
         params = (user.username, event.nom, seat,'unpaid')
-        
         try:
             cls.cursor.execute(sql, params)
             cls.connexion.commit()
@@ -26,7 +24,8 @@ class ReservationDAO:
             cls.cursor.execute(sql2, (event.nom,))
             place_dispo = cls.cursor.fetchall()
             place_disp = place_dispo[0]
-            if place_disp[0] <= 0:
+            
+            if place_disp[0]-seat <= 0:
                 message = "failure place"
                 return message
             else:
