@@ -10,7 +10,9 @@ class PaiementDAO:
     @classmethod
     def add(cls,user:User, paiement:Paiement):
         sql = "INSERT INTO paiement (username, num_carte, num_secu) VALUES(%s, %s, %s)"
+        print(user)
         params = (user.username, paiement.num_carte, paiement.num_secu)
+        
         try:
             cls.cursor.execute(sql, params)
             cls.connexion.commit()
@@ -60,6 +62,7 @@ class PaiementDAO:
         except Exception as error:
             message = "failure"
             return message
+        
     @classmethod 
     def get_pay_by_user(cls,user:User):
         sql = "SELECT * FROM paiement where username = %s"

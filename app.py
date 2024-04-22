@@ -5,6 +5,10 @@ from Users.User import User
 from Users.UserDAO import UserDAO
 from Events.Event import Event
 from Events.EventDAO import EventDAO 
+from Reservations.Reservation import Reservation
+from Reservations.ReservationDAO import ReservationDAO
+from Paiements.Paiement import Paiement
+from Paiements.PaiementDAO import PaiementDAO
 
 import re                       # Pour le phone pattern
 from dotenv import load_dotenv  # Pour lire le fichier .env
@@ -123,7 +127,8 @@ def account():
     if "username" in session:
         message, user_data = UserDAO.get_user_by_username(session["username"])
         if message == "success":
-            return render_template('account.html', username=session["username"], user=user_data)
+            reservations = ReservationDAO.get_reservation_by_user(user_data)
+            return render_template('account.html', username=session["username"], user=user_data,reservations=reservations )
         else:
             return render_template('error.html', message=message)  # Pass the error message from UserDAO
     else:
@@ -259,3 +264,68 @@ def admin_panel():
         return redirect(url_for('logout'))
 
     
+# # # RESERVE # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+@app.route('/reserve', methods=['GET','POST'])
+def reserve():
+    if 'username' in session:
+        if request.method == "GET":
+            event_nom = request.args.get('event_name')
+            message, events = EventDAO.get_event_by_name(event_nom)
+            return render_template('reserve.html', username=session["username"], event=events)
+        elif request.method == "POST":
+            event_nom = request.form.get('event_name')
+            username = request.form.get('username')
+            num_places = request.form.get('place')
+            message, event = EventDAO.get_event_by_name(event_nom)
+            message, user = UserDAO.get_user_by_username(username)
+            ReservationDAO.add(user,event,num_places)
+            # Enregistrer la réservation dans la base de données ou effectuer d'autres actions nécessaires
+            message, events = EventDAO.list_all()
+            return render_template('events.html', username=session["username"], event=events)
+    else:
+        return redirect(url_for('login'))
+# # # PAYMENT # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
+@app.route('/payment', methods=['GET','POST'])
+def payment():
+    if 'username' in session:
+        if request.method == "GET":
+            event_nom = request.args.get('event_name')
+            username = request.args.get('username')
+            num_places = request.args.get('place')
+            message, events = EventDAO.get_event_by_name(event_nom)
+            return render_template('payment.html', username=session["username"], event=events)
+        
+        elif request.method == "POST":
+            username = session["username"]
+            event_nom = request.form.get('event_name')
+            num_carte = request.form.get('num_carte')
+            num_secu = request.form.get('num_secu')
+            message, user = UserDAO.get_user_by_username(username)
+            message, event = EventDAO.get_event_by_name(event_nom)
+            cc = Paiement(username, num_carte, num_secu)
+            PaiementDAO.add(user, cc)
+            PaiementDAO.pay(user, event)
+            
+            return render_template('account.html',user=user, event=event)
+        
+@app.route('/cancel', methods=['GET','POST'])
+def cancel():
+    if 'username' in session:
+        # Fetch user data and reservations
+        message, user_data = UserDAO.get_user_by_username(session["username"])
+        reservations = ReservationDAO.get_reservation_by_user(user_data)
+        # Handle GET and POST requests
+        if request.method == "GET":
+            username = session['username']
+        elif request.method == "POST":
+            username = session["username"]
+            event_nom = request.form.get('event_name')
+            # Get user and event details
+            message, user = UserDAO.get_user_by_username(username)
+            message, event = EventDAO.get_event_by_name(event_nom)
+            # Delete reservation and get message
+            message = ReservationDAO.del_reservation(user, event)
+        # Render template with user data and reservations
+        return render_template('account.html', user=user_data, reservations=reservations)
+    else:
+        return redirect(url_for('login'))

@@ -21,7 +21,7 @@
                     <p><strong>Date:</strong> {{ event.date }}</p>
                     <p><strong>Price:</strong> {{ event.prix }}$</p>
                     <!-- Add more event details as needed -->
-                    <button class="btn btn-warning">Réserver</button>
+                    <a href="{{ url_for('reserve', event_name=event.nom) }}" class="btn btn-warning">Réserver</a>
                 </div>
             </div>
         </div>

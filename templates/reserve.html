@@ -1,0 +1,22 @@
+{% extends "default.html" %}
+
+{% block title %} Réserver des places {% endblock %}
+
+{% block content %}
+
+<div class="center-container" style="margin-top: 5%;">
+    <div class="reservation-container" style="margin: 2%; width: 50%;">
+        <form action="/reserve" method="post">
+            <h2>Réserver des places pour l'événement "{{ event.nom }}"</h2>
+            <div class="form-group" style="margin-bottom: 2%; margin-left: 7%; margin-right: 7%;">
+                <label for="place">Nombre de places :</label>
+                <input type="number" class="form-control" id="place" name="place" min="1">
+            </div>
+            <input type="hidden" name="event_name" value="{{ event.nom }}">
+            <input type="hidden" name="username" value="{{ username }}">
+            <button type="submit" class="btn btn-warning">Réserver</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

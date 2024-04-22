@@ -17,8 +17,11 @@ class ReservationDAO:
     def add(cls,user:User,event:Event,seat):
         sql = "INSERT INTO reservation (username, event, place, statut) VALUES (%s, %s, %s, %s)"
         params = (user.username, event.nom, seat,'unpaid')
+        place_dispo = int(event.place_dispo)
+        seat = int(seat)
         try:
-            if seat > event.place_dispo:
+            print(seat, place_dispo)
+            if seat > place_dispo:
                 message = "failure place"
                 return message
             else:
@@ -28,7 +31,6 @@ class ReservationDAO:
                 cls.cursor.execute(sql2, (event.nom,))
                 place_dispo = cls.cursor.fetchall()
                 place_disp = place_dispo[0]
-
             if place_disp[0]-seat <= 0:
                 message = "failure place"
                 return message
@@ -46,42 +48,30 @@ class ReservationDAO:
         
 
     @classmethod
-    def del_reservation(cls,user:User,event:Event):
-
-        sql = "SELECT place FROM reservation WHERE username = %s AND event =%s"
-        params = (user.username,event.nom)
+    def del_reservation(cls, user: User, event: Event):
         try:
-            cls.cursor.execute(sql, params)
+            # Select the number of seats taken by the user for the event
+            sql = "SELECT place FROM reservation WHERE username = %s AND event = %s"
+            cls.cursor.execute(sql, (user.username, event.nom))
             place_prise = cls.cursor.fetchall()
-        except ValueError as error:
-            message = "failure"
-            return message
-        sql2 = "DELETE FROM reservation WHERE username =%s AND event =%s"
-        try:
-            cls.cursor.execute(sql2, params)
+            place_prise = place_prise[0]
+            print("=====================")
+            # Delete the reservation
+            sql2 = "DELETE FROM reservation WHERE username = %s AND event = %s"
+            cls.cursor.execute(sql2, (user.username, event.nom))
+            print("=====================")
+            # Update the available spots for the event
+            sql3 = "UPDATE event SET place_dispo = place_dispo + %s WHERE nom = %s"
+            print(place_prise,event.nom)
+            cls.cursor.execute(sql3, (place_prise[0], event.nom))
             cls.connexion.commit()
-        except ValueError as error:
-            message = "failure"
-            return message
-        try:
-            sql3 = "SELECT place_dispo FROM event WHERE nom=%s"
-            cls.cursor.execute(sql3, (event.nom,))
-            place_dispo = cls.cursor.fetchall()
-            place_restante = place_dispo[0][0] + place_prise[0][0]
-        except ValueError as error:
-            message = "failure"
-            return message
-        try:
-            sql4 = "UPDATE event SET place_dispo = %s WHERE nom=%s"
-            params4 = (place_restante,event.nom)
-            cls.cursor.execute(sql4, params4)
-            cls.connexion.commit()
+            
             message = "success"
-            return message
-        except ValueError as error:
-            message = "failure"
-            return message
+        except Exception as e:
+            message = f"failure: {str(e)}"
         
+        return message
+
     @classmethod
     def get_reservation_by_user(cls,user:User):
         sql = "SELECT * FROM reservation WHERE username =%s"

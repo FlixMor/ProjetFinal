@@ -22,8 +22,31 @@
     </div>
     <div class="container-right" style="flex-grow: 1;">
         <div style="margin-left: 10%;">
-            <p>Éventuellement nous allons rajouter les réservations faites par l'utilisateur, de même que leur statut
-                (confirmé, en attente)</p>
+            {% for i in reservations %}
+        <div class="reserv-container">
+            <div class="reserv-details">
+                    <p><strong>Event:</strong> {{ i[1] }}</p>
+                    <p><strong>Seats:</strong> {{ i[2] }} spots</p>
+                    <p><strong>Status:</strong> {{ i[3] }}</p>
+                    {% if i[3] == 'unpaid' %}
+                    <form action="{{ url_for('payment', event_name=i[1], user=user ) }}" method="GET">
+                        <input type="hidden" name="event_name" value="{{ i[1] }}">
+                        <input type="hidden" name="user" value="{{ user.username }}">
+                        <button type="submit" class="btn btn-success">Pay Reservation</button>
+                    </form>
+                    {% endif %}
+                    {% if i[3] == 'paid' %}
+                    <form action="{{ url_for('cancel', event_name=i[1], user=user) }}" method="POST">
+                        <input type="hidden" name="event_name" value="{{ i[1] }}">
+                        <input type="hidden" name="user" value="{{ user.username }}">
+                        <button type="submit" class="btn btn-danger">Cancel Reservation</button>
+                    </form>
+                    {% endif %}
+
+                    <p></p>
+            </div>
+        </div>
+        {% endfor %}
         </div>
     </div>
 </div>
