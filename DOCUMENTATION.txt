@@ -17,5 +17,5 @@ Résumé des fonctions de sécurités ajoutées:
     Cela permet d'éviter que les mots de passes utilisateurs soient entreposés
      en texte clair dans la base de donnée; une couche de protection supplémentaire.
 
+5- Nous avons mis en place une validation accrue des entrées utilisateurs, de sorte de gérer les mauvaises entrées utilisateurs
 
-5-
